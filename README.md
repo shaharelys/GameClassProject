@@ -31,4 +31,8 @@ The game concludes when you defeat the Great Monster or when you lose all your h
 
 Installation and Running the Game
 This game requires Python 3.6 or later. Download or clone this repository, navigate to the repository directory, and run the following command in your terminal to start the game:
-python main.py
+    
+    ```
+    bash
+    python main.py
+    ```
