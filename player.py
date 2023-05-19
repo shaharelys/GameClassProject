@@ -1,10 +1,6 @@
 # player.py
 from item import Item
 from location import Location
-
-# player.py
-from item import Item
-from location import Location
 from config import *
 
 
