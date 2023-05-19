@@ -1,8 +1,10 @@
 # game.py
 from factory import LocationFactory, ItemFactory, EnemyFactory
+from commands import InformCommand, MoveCommand, UseItemCommand, ConfrontCommand
 from player import Player
 from location import Location
 from config import *
+
 
 
 class Game:
@@ -44,49 +46,21 @@ class Game:
         Handles the logic for each turn of the game.
         """
 
-        # Simplified objects for readability
-        player = self.player
-        current_location = self.player.location
-        enemies = self.player.location.enemies
-        game_locations = self.locations
-
         print(PLAY_TURN_MENU)  # player chooses from OP1, OP2, OP3, OP4
         action = input("> ")
 
-        if action == OP1:
-            self.inform(current_location)
+        commands = {
+            OP1: InformCommand(self),
+            OP2: MoveCommand(self),
+            OP3: UseItemCommand(self),
+            OP4: ConfrontCommand(self)
+        }
 
-        elif action == OP2:
-            if not current_location.name == CASTLE:
-                if enemies:
-                    # Have to defeat the enemy before moving to the next location
-                    print(PLAY_TURN_ACT2_MSG2.format(enemies[0].name))
-                else:
-                    player.move(game_locations[current_location.index + 1])
-                    new_location = player.location
-                    self.enter_location(new_location)
-            else:
-                print(PLAY_TURN_ACT2_MSG1)
-
-        elif action == OP3:
-            if not self.player.inventory:
-                print(PLAY_TURN_ACT3_MSG2)
-            else:
-                print(PLAY_TURN_ACT3_MSG3)
-                for i, item in enumerate(self.player.inventory, 1):
-                    print(f"{i}. {item.name}")
-                try:
-                    item_number = int(input("> ")) - 1
-                    self.player.use(self.player.inventory[item_number])
-                except ValueError:
-                    print("Please enter a valid number.")
-
-        elif action == OP4:
-            if enemies:
-                print(PLAY_TURN_ACT4_MSG0.format(enemies[0].name))
-                self.player.confront(enemies[0])
-            else:
-                print(PLAY_TURN_ACT4_MSG1)
+        try:
+            command = commands[action]
+            command.execute()
+        except KeyError:
+            print(INPUT_ERROR_MSG)
 
     def enter_location(self, location: Location) -> None:
         """

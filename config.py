@@ -15,7 +15,7 @@ START_MSG = "Welcome, courageous traveler, to 'The Hunt for The Great Monster'!\
             "As you embark on this perilous journey, remember that bravery is not the absence of fear, but the will\n" \
             "to confront it. May your heart be your guiding key as you venture forth to save your village from the\n" \
             "looming darkness. Let the Hunt for The Great Monster begin!\n\n\n" + START_DIVIDER
-OP1, OP2, OP3, OP4 = "1", "2", "3", "4"
+OP1, OP2, OP3, OP4, = "1", "2", "3", "4"
 PLAY_TURN_MENU = f"\nWhat would you like to do?\n" \
                  f"{OP1}. Get informed\n" \
                  f"{OP2}. Move to the next location\n" \
@@ -165,3 +165,4 @@ USE_MSG1 = "You have used the {}! You gained {} health points and you now have {
 
 """general"""
 UNKNOWN_TYPE = "Unknown Type"
+INPUT_ERROR_MSG = "ERROR. Please enter a valid number."
