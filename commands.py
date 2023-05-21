@@ -8,7 +8,7 @@ class ICommand(ABC):
     Abstract base class for all commands.
     """
     @abstractmethod
-    def execute(self):
+    def execute(self) -> None:
         pass
 
 
@@ -16,10 +16,10 @@ class InformCommand(ICommand):
     """
     Concrete Command class for the inform action.
     """
-    def __init__(self, game):
+    def __init__(self, game) -> None:
         self.game = game
 
-    def execute(self):
+    def execute(self) -> None:
         self.game.inform(self.game.player.location)
 
 
@@ -27,10 +27,10 @@ class MoveCommand(ICommand):
     """
     Concrete Command class for the move action.
     """
-    def __init__(self, game):
+    def __init__(self, game) -> None:
         self.game = game
 
-    def execute(self):
+    def execute(self) -> None:
         current_location = self.game.player.location
         enemies = current_location.enemies
         game_locations = self.game.locations
@@ -50,10 +50,10 @@ class UseItemCommand(ICommand):
     """
     Concrete Command class for the use item action.
     """
-    def __init__(self, game):
+    def __init__(self, game) -> None:
         self.game = game
 
-    def execute(self):
+    def execute(self) -> None:
         if not self.game.player.inventory:
             print(PLAY_TURN_ACT3_MSG2)
         else:
@@ -71,10 +71,10 @@ class ConfrontCommand(ICommand):
     """
     Concrete Command class for the confront action.
     """
-    def __init__(self, game):
+    def __init__(self, game) -> None:
         self.game = game
 
-    def execute(self):
+    def execute(self) -> None:
         enemies = self.game.player.location.enemies
         if enemies:
             print(PLAY_TURN_ACT4_MSG0.format(enemies[0].name))
